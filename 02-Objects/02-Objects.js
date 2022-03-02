@@ -2,23 +2,26 @@
 function crearClaseLibro() {
   class Libro {
     constructor(titulo, autor, traducciones) {
-      // El constructor de la clase Libro recibe titulo (string), autor (string), traducciones (array de objetos)
+      // El constructor de la clase Libro recibe titulo (string), autor (string), traducciones
+      // (array de objetos)
       // Inicializar las propiedades del libro con los valores recibidos como argumento
       // Tu código aca:
-      
+      this.titulo = titulo;
+      this.autor = autor;
+      this.traducciones = traducciones;
       
     }
 
     getTitulo() {
       // este método debe retornar el titulo del libro.
       // Tu código aca:
-      
+      return this.titulo;
     }
 
     getAutor() {
       // El método debe retornar nombre y apellido del autor
       // Tu código aca:
-      
+      return this.autor;
     }
 
     addTraduccion(idioma, editorial) {
@@ -26,7 +29,7 @@ function crearClaseLibro() {
       // { idioma: idioma, editorial: editorial} al arreglo de traducciones del libro.
       // No debe retornar nada.
       // Tu código aca:
-      
+      this.traducciones.push({idioma, editorial});
     }
 
     getTraducciones() {
@@ -36,6 +39,14 @@ function crearClaseLibro() {
       // libro.getTraducciones() debería devolver ['inglés', 'castellano']
       // Tu código aca:
       
+      let arr = [];
+      this.traducciones.forEach(element => arr.push(element.idioma));
+      ///////////////////////////////////////////////////////
+      // for(const elem of this.traducciones){             modo iterable con bucle for of(para array's y str)
+      //  arr.push(elem.idioma)
+      // }
+      ///////////////////////////////////////////////////////
+      return arr;
 
     }
 
@@ -47,6 +58,8 @@ function crearClaseLibro() {
       // libro.getAlcance() deberia devolver 2
       // Tu código aca:
       
+      let idiomas = new Set(this.getTraducciones());   //new Set()  omite valores repetidos 
+      return idiomas.size;                             //.size acceder al tamaño de un set 
 
     }
   }
@@ -72,8 +85,15 @@ const printStaff = function (objeto) {
   // Retornar un arreglo que contenga los strings indicando el titulo y nombre de cada miembro del staff
   // de esta forma "The headmaster is Albus Percival Wulfric Brian Dumbledore" 
   // el arreglo debe mantener el orden que posee el staff del objeto.
-  
-  
+
+  let prop = Object.keys(objeto.staff) // .keys devuelve un arreglo de str's
+  let arr = [];
+  prop.forEach(elem=>{
+    arr.push(`The ${elem} is ${objeto.staff[elem].name}`) // `${}`interpolacion de str's
+  })
+
+  return arr;
+
 };
 
 module.exports = { crearClaseLibro, printStaff };
