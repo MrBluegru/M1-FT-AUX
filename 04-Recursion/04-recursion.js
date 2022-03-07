@@ -4,6 +4,8 @@
 // producto([7, 2, 5]) devuelve 70
 const producto = function (array) {
   //escribe aqui tu codigo
+    if(array.length === 0) return 1;
+    return array.shift()*producto(array);
   
 };
 
@@ -24,5 +26,13 @@ const producto = function (array) {
 // }
 const isThere = function (obj, value) {
   //escribe aqui tu codigo
+
+  for(let key in obj ){
+    if (typeof obj [key] === 'object') return isThere(obj[key], value)
+    if(obj[key] === value) return true 
+  
+  }
+  return false;
+
 };
 module.exports = { producto, isThere };
